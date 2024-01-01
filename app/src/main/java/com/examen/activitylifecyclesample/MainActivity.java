@@ -1,16 +1,17 @@
 package com.examen.activitylifecyclesample;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
 import com.examen.activitylifecyclesample.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     private ActivityMainBinding binding;
 
@@ -21,17 +22,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View view = binding.getRoot();
         setContentView(view);
         //get the launch mode of the activity
-        int launchMode = getLaunchMode();
-       // Print or log the launch mode
-      //  System.out.println("Launch Mode: " + getLaunchModeString(launchMode));
-        String result = getLaunchModeString(launchMode);
-        Log.d(TAG, "onCreate: " + result);
+
+       // binding.mainContainer.getId();
         initView();
 
     }
 
     private void initView() {
-        binding.BtNext.setOnClickListener(this);
+        int launchMode = getLaunchMode();
+        // Print or log the launch mode
+        //  System.out.println("Launch Mode: " + getLaunchModeString(launchMode));
+        String result = getLaunchModeString(launchMode);
+        Log.d(TAG, "onCreate: " + result);
+
 
     }
 
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String getLaunchModeString(int launchMode) {
         switch (launchMode) {
             case ActivityInfo.LAUNCH_MULTIPLE:
+                callHome();
                 return "Standard";
             case ActivityInfo.LAUNCH_SINGLE_TOP:
                 return "SingleTop";
@@ -69,6 +73,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 return "Unknown";
         }
+    }
+
+    private void callHome() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                FragmentA homeFragment = new FragmentA();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.add(R.id.main_container,homeFragment);
+                fragmentTransaction.addToBackStack(null); // after added this activity does not close and app also stay as blank screens
+                fragmentTransaction.commit();
+            }
+        },2000);
     }
 
     @Override
@@ -95,16 +113,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "onRestart: ");
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId()==R.id.BtNext){
-            callNextActivity();
-        }
-    }
 
-    private void callNextActivity() {
-        Intent intent = new Intent(this, NextActivity.class );
-        intent.putExtra("NAME","Sainath");
-        startActivity(intent);
-    }
 }

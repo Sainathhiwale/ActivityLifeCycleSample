@@ -1,0 +1,9 @@
+What is Fragment and method in fragment
+- Android Fragment is the part of activity it also known as sub-activity. we can add more then
+ one fragment in single activity.fragment represent multiple inside one activity
+ Fragment represents a behavior or a portion of user interface in an Activity. You can combine multiple
+ fragments in a single activity to build a multi-pane UI and reuse a fragment in multiple activities.
+
+ Fragment Life Cycle Method:
+ 1.onAttach(): it is called when the fragment attached to an activity
+ 2.
