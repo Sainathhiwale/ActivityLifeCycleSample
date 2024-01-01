@@ -6,4 +6,4 @@ What is Fragment and method in fragment
 
  Fragment Life Cycle Method:
  1.onAttach(): it is called when the fragment attached to an activity
- 2.
+ 2.onCreated()
