@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ActivityLifeCycleSample</string>
+    <string name="next_screen">Next Screen\n</string>
+</resources>
