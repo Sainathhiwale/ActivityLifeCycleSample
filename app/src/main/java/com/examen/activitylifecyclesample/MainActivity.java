@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        binding.etText.setText(R.string.helloActivity);
         int launchMode = getLaunchMode();
         // Print or log the launch mode
         //  System.out.println("Launch Mode: " + getLaunchModeString(launchMode));

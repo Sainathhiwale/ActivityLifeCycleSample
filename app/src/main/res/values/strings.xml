@@ -3,4 +3,6 @@
     <string name="next_screen">Next Screen\n</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragmentA">Hello Fragment A </string>
+    <string name="helloActivity">Hello\n</string>
 </resources>

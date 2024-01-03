@@ -1,3 +1,6 @@
+https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd
+https://medium.com/@pratham_21198/understanding-the-fragment-lifecycle-c730a3263a6b
+
 What is Fragment and method in fragment
 - Android Fragment is the part of activity it also known as sub-activity. we can add more then
  one fragment in single activity.fragment represent multiple inside one activity
@@ -6,4 +9,4 @@ What is Fragment and method in fragment
 
  Fragment Life Cycle Method:
  1.onAttach(): it is called when the fragment attached to an activity
- 2.onCreated()
+ 2.onCreated():

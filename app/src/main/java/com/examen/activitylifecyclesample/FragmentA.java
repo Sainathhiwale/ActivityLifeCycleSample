@@ -11,10 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.examen.activitylifecyclesample.databinding.FragmentABinding;
 
 
 public class FragmentA extends Fragment {
+    private FragmentABinding fragmentABinding;
     public static final String TAG = FragmentA.class.getSimpleName();
+    private TextView txtView;
     public FragmentA() {
         // Required empty public constructor
     }
@@ -35,9 +40,17 @@ public class FragmentA extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_a, container, false);
+        fragmentABinding = FragmentABinding.inflate(inflater,container,false);
+        initView();
+        return fragmentABinding.getRoot();
+      /*  View view = inflater.inflate(R.layout.fragment_a, container, false);
         Log.d(TAG, "onCreateView: is called");
-        return view;
+
+        return view;*/
+    }
+
+    private void initView() {
+        fragmentABinding.txtview.setText(R.string.fragmentA);
     }
 
     @Override
