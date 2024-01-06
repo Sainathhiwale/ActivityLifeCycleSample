@@ -10,3 +10,14 @@ What is Fragment and method in fragment
  Fragment Life Cycle Method:
  1.onAttach(): it is called when the fragment attached to an activity
  2.onCreated():
+
+
+
+ Fragment Lifecycle state when we performing operation like back close remove add
+
+ 1.Case: When user click back from fragmentA to MainActivity below method is called in fragment
+    D  onPause: is called
+    D  onStop: is called
+    D  onDestroyView: is called
+    D  onDestroy: is called
+    D  onDetach: is called

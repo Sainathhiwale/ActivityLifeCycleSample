@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="horizontal">
-  <EditText
+ <!-- <EditText
       android:text="@string/helloActivity"
       android:id="@+id/etText"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:inputType="text" />
+      android:inputType="text" />-->
   <FrameLayout
       android:id="@+id/main_container"
       android:layout_width="match_parent"

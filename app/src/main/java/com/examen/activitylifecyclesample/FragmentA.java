@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 import com.examen.activitylifecyclesample.databinding.FragmentABinding;
 
 
-public class FragmentA extends Fragment {
+public class FragmentA extends Fragment implements View.OnClickListener {
     private FragmentABinding fragmentABinding;
     public static final String TAG = FragmentA.class.getSimpleName();
     private TextView txtView;
@@ -51,6 +52,7 @@ public class FragmentA extends Fragment {
 
     private void initView() {
         fragmentABinding.txtview.setText(R.string.fragmentA);
+        fragmentABinding.button.setOnClickListener(this);
     }
 
     @Override
@@ -99,5 +101,19 @@ public class FragmentA extends Fragment {
     public void onDetach() {
         super.onDetach();
         Log.d(TAG, "onDetach: is called");
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId()==R.id.button){
+            callFragmentB();
+        }
+    }
+
+    private void callFragmentB() {
+        FragmentB fragmentB = new FragmentB();
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.main_container,fragmentB);
+        fragmentTransaction.commit();
     }
 }

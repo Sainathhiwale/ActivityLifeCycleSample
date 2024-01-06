@@ -2,4 +2,5 @@
 <resources>
     <string name="next_screen">Next Screen\n</string>
     <string name="helloActivity">Hello\n</string>
+    <string name="fragment_b">Fragment B\n</string>
 </resources>
