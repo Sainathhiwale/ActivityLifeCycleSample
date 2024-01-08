@@ -6,18 +6,302 @@ What is Fragment and method in fragment
  one fragment in single activity.fragment represent multiple inside one activity
  Fragment represents a behavior or a portion of user interface in an Activity. You can combine multiple
  fragments in a single activity to build a multi-pane UI and reuse a fragment in multiple activities.
+ Fragment defination:
+ In Android, the fragment is the part of Activity that represents a portion of the User Interface(UI) on
+ the screen. It is the modular section of the android activity that is very helpful in creating UI
+ designs that are flexible in nature and auto-adjustable based on the device screen size. You can combine
+ multiple fragments in a single activity to build a multi-pane UI.
+ There are mainly 3 types of fragments:
+ 1.Single Fragment
+ 2.List Fragment
+ 3.Fragment Transaction
 
- Fragment Life Cycle Method:
+Fragments in Android has several advantages:
+Modularity: Fragments promote modular design by breaking down the UI into smaller, self-contained components.
+Reusability: Fragments can be reused in different activities, enhancing code reusability.
+Adaptability: Fragments are particularly useful for creating responsive layouts that can adapt to different
+screen sizes and orientations.
+Parallel Execution: Fragments allow multiple UI components to run in parallel within the same activity.
+
+Fragment Life Cycle Method details:
+
  1.onAttach(): it is called when the fragment attached to an activity
- 2.onCreated():
+ 2.onCreate(): Called when the fragment is first created.
+ 3.onCreateView(): Invoked to create the view hierarchy associated with the fragment.
+ 4.onActivityCreated(): Called when the hosting activity's onCreate() method has completed.
+ 5.onStart(): Signals that the fragment is becoming visible.
+ 6.onResume(): Called when the fragment is visible and interactive.
+ 7.onPause(): Indicates that the fragment is no longer interactive or visible to the user.
+ 8.onStop(): Called when the fragment is no longer visible.
+ 9.onDestroyView(): Invoked when the view hierarchy associated with the fragment is being removed.
+ 10.onDestroy(): Called when the fragment is being destroyed.
+ 11.onDetach(): Called when the fragment is being disassociated from its hosting activity.
 
 
-
+-------------------------------------------------------------------------------------------------------------
  Fragment Lifecycle state when we performing operation like back close remove add
+ link:https://androidlearnersite.wordpress.com/2017/02/27/fragment-lifecycle-during-fragment-transaction/
+ Case 1:
+ 1. When user click back from fragmentA to MainActivity below method is called in fragment
+    -onPause(): is called
+    -onStop(): is called
+    -onDestroyView(): is called
+    -onDestroy(): is called
+    -onDetach(): is called
 
- 1.Case: When user click back from fragmentA to MainActivity below method is called in fragment
-    D  onPause: is called
-    D  onStop: is called
-    D  onDestroyView: is called
-    D  onDestroy: is called
-    D  onDetach: is called
+ 2.When Fragment B is added to Fragment A
+   getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, fragementB).addToBackStack(null).commit();
+   Fragment B is calling below method to come foreground state
+   -onAttach()
+   -onCreate()
+   -onCreateView()
+   -onActivityCreated()
+   -onStart()
+   -onResume()
+   note: No lifecycle methods of Fragment A is being called.
+   Fragment A will only be affected if it’s removed or replaced. Simply adding another fragment will just
+   display fragment B over fragment A and no life cycle callbacks of fragment A should be called.
+
+ 3.Then using popBackStack() in Fragment B (stack sequence: Fragment B-> Fragment A)
+   Fragment B is called below method after remove the fragment top of stack using the popBackStack() method.
+   - onPause()
+   - onStop()
+   - onDestroyView()
+   - onDestroy()
+   - onDetach()
+  note: No lifecycle methods of Fragment A is being called Since fragment B was added on top of A, fragment A is not affected by the removal of B.
+ 4. On Fragment Launched (First Time)
+   - onAttach:
+   - onCreateView:
+   - onViewCreated:
+   - onActivityCreated:
+   - onStart:
+   - onResume:
+
+ Case 2:
+ 1. When Fragment B replaces Fragment A
+    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragementB).commit();
+    When Fragment B is replaces fragment A using replace() below method is called in both fragment. by Sequence
+    Fragment B
+    - onAttach()
+    - onCreate()
+    Fragment A
+    - onPause()
+    - onStop()
+    - onDestroyView()
+    - onDestroy()
+    - onDetach()
+    Fragment B
+    - onCreateView()
+    - onActivityCreated()
+    - onStart()
+    - onResume()
+
+    Note:When Fragment B replaces Fragment A,Fragment A is destroyed and Fragment B is created.However
+        in case the transaction that had added Fragment A was saved using addToBackStack method,then backstack
+        is holding reference to that fragment from previous transaction and hence only its view is destroyed.i.e.
+        onDestroy and onDetach method of Fragment A will not be called.
+Case 3:
+ 1. When Fragment B replace Fragment A keeping it in backstack.
+   FragmentB fragmentB = new Fragment()
+   getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragementB).addToBackStack("tag").commit();
+   Fragment B
+   - onAttach()
+   - onCreate()
+   Fragment A
+   - onPause()
+   - onStop()
+   - onDestroyView()
+   Fragment B
+   - onCreateView()
+   - onActivityCreated()
+   - onStart()
+   - onResume()
+   note:onDestroy and onDetach method of Fragment A is NOT called.Unlike a simple replace,
+   when you add your replace transaction to the backstack you’re actually keeping the
+   first fragment attached to it’s activity, only its view is destroyed.
+
+ 2. The using popBackStack() in Fragment B
+   Fragment B
+  - onPause()
+  - onStop()
+  - onDestroyView()
+  - onDestroy()
+  - onDetach()
+  Fragment A
+  - onCreateView()
+  - onActivityCreated()
+  - onStart()
+  - onResume()
+  note: View of Fragment A is recreated and Fragment B is destroyed
+
+  FragmentTransaction class has a method named setAllowOptimization().It sets whether or not to allow optimizing
+  operations within and across transactions.Setting its value to true during fragment transaction,you will see change
+  in the sequence in which lifecycle’s methods are called.setAllowOptimization() was deprecated in API level 26.1.0
+  and has been renamed to setReorderingAllowed().
+
+  In Case 2 during replacing Fragment, lifecycle methods of Fragment B are called before lifecycle methods of Fragment A
+  if setAllowOptimization() is set to true
+ Fragment B
+ onAttach-onCreate-onCreateView-onActivityCreated-onStart-onResume
+ Fragment A
+ onPause-onStop-onDestroyView-onDestroy-onDetach
+
+ In Case 3 during replacing fragment,lifecycle methods of Fragment B are called before lifecycle methods of Fragment A
+ if setAllowOptimization() is set to true
+ Fragment B
+ onAttach-onCreate-onCreateView-onActivityCreated-onStart-onResume
+ Fragment A
+ onPause-onStop-onDestroyView
+
+ In Case 3 using popBackStack() in Fragment B,lifecycle methods of Fragment A are called before lifecycle methods of
+ Fragment B if setAllowOptimization() is set to true .
+ Fragment A
+ onCreateView-onActivityCreated-onStart-onResume
+ Fragment B
+ onPause-onStop-onDestroyView-onDestroy-onDetach
+ In Case 1, sequence of lifecycle method calls will remain same whether setAllowOptimization is true or false.
+ ---------------------------------------------------------------------------------------------------------------------------
+ Fragment Scenario test case
+ link: https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd
+ Scenario 1: Activity with Fragment starts and finishes
+ Activity                                                 Fragment
+ onCreated()----------------------------------->-onAttach()
+            ----------------------------------->-onCreate(Null)
+            ----------------------------------->-onCreateView(Null)
+            ----------------------------------->-onActivityCreated(Null)
+ onStart() <----------------------------------->-onStart()
+ onResume()<----------------------------------->-onResume()
+      Fragment is become visible and interact to user
+
+ Back pressed
+ onPause()<------------------------------------> onPause()
+ onStop() <------------------------------------> onStop()
+ onDestroy() <---------------------------------> onDestroyView()
+
+
+ ---------------------------------------------------------------------------------------------------------------------------
+ 1.Question: Why is it recommended to use only the default constructor to create a Fragment?
+ link:https://amitshekhar.me/blog/default-constructor-to-create-a-fragment
+ Ans: Whenever the Android Framework decides to recreate our Fragment for example in case of orientation changes.
+ Android calls the no-argument constructor of our Fragment.
+ The reason why can’t it call the constructor with the argument is that Android Framework has no idea
+ what constructor we have created. So it can’t.
+
+ 2.Question: which is lifecycle method will call in fragment when the orientation changes or screen rotated?
+ Ans: When the screen orientation changes or the device is rotated in Android, the activity is typically destroyed
+ and recreated. This change triggers certain lifecycle methods for both the activity and its fragments.
+ For fragments, the key methods related to orientation changes are:
+ 1.onPause(): This method is called when the fragment is no longer visible or interactive.
+ It's a signal that the fragment is about to be detached from the current activity.
+ 2.onStop(): Similar to onPause(), this method is called when the fragment is no longer visible.
+ 3.onDestroyView(): This method is called to indicate that the view hierarchy associated with the fragment is being removed.
+ 4.onDestroy(): Called when the fragment is being destroyed.
+ 5.onDetach(): This method is called when the fragment is being disassociated from its hosting activity.
+ After the orientation change, the activity is recreated, and the following methods are called for the fragment:
+ 1.onAttach(): Called when the fragment is associated with a new activity.
+ 2.onCreate(): Invoked when the fragment is first created.
+ 3.onCreateView(): Invoked to create the view hierarchy associated with the fragment.
+ 4.onActivityCreated(): Called when the hosting activity's onCreate() method has completed.
+ 5.onStart(): Signals that the fragment is becoming visible.
+ 6.onResume(): Called when the fragment is visible and interactive.
+
+ These lifecycle methods allow developers to handle changes in configuration, such as screen orientation changes,
+ by saving and restoring the necessary state information. For example, you can use the onSaveInstanceState()
+ method to save data before the fragment is destroyed and then restore it in the onCreate() or onCreateView()
+ methods after the recreation.
+ Here's a simplified sequence of lifecycle methods during a screen orientation change:
+ onPause()
+ onStop()
+ onDestroyView()
+ onDestroy()
+ onDetach() - destroy the fragment
+ onAttach() - recreate the fragment after screen rotation
+ onCreate()
+ onCreateView()
+ onActivityCreated()
+ onStart()
+ onResume()
+
+ ----------------------------------------------------------------------------------------------------------------------------
+        On Fragment Launched (First Time)
+        ———————————————————————
+        link: https://stackoverflow.com/questions/42218546/understanding-fragments-lifecycle-methods-calls-during-fragment-transaction/42237744#42237744
+        onAttach:
+        onCreateView:
+        onViewCreated:
+        onActivityCreated:
+        onStart:
+        onResume:
+
+
+        On Coming Back To Fragment (From another fragment)
+        ———————————————————————
+        onCreateView:
+        onViewCreated:
+        onActivityCreated:
+        onStart:
+        onResume:
+
+
+        OnMaximize(Square Button-After Back Pressed)
+        ———————————————————————
+        onAttach:
+        onCreateView:
+        onViewCreated:
+        onActivityCreated:
+        onStart:
+        onResume:
+
+
+        OnMaximize(Square Button-After Circle Button)
+        ———————————————————————
+        onStart:
+        onResume:
+
+
+        OnMaximize(After Circle Button)
+        ————————————————————————————————————————————————
+        onStart:
+        onResume:
+        Fragment Stopped
+
+        On Going To Another Fragment (Skipping 1 Fragment)
+        ———————————————————————
+        onPause:
+        onStop:
+        onDestroyView:
+
+
+        On BackPressed - Reverse Triangle Button (App Minimized)
+        ———————————————————————
+        onPause:
+        onStop:
+        onDestroyView:
+        onDestroy:
+        onDetach:
+
+
+        OnMinimize (Circle Button)
+        ————————————————————————————————————————————————
+        onPause:
+        onStop:
+
+
+        OnMinimize (Square Button)
+        ————————————————————————————————————————————————
+        onPause:
+        onStop:
+
+
+        Going To Another Activity
+        ————————————————————————————————————————————————
+        onPause:
+        onStop:
+
+
+        Close The App
+        ————————————————————————————————————————————————
+        onDestroyView:
+        onDestroy:
+-------------------------------------------------------------------------------------------------------

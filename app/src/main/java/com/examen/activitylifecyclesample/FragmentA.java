@@ -112,7 +112,7 @@ public class FragmentA extends Fragment implements View.OnClickListener {
 
     private void callFragmentB() {
         FragmentB fragmentB = new FragmentB();
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main_container,fragmentB);
         fragmentTransaction.commit();
     }
