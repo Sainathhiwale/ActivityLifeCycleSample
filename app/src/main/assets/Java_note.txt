@@ -1,0 +1,105 @@
+
+1. What is JVM JDK and JRE ?
+Link:https://www.javatpoint.com/difference-between-jdk-jre-and-jvm
+JVM: JVM stands for java virtual machine and it is an abstract machine. it is called a virtual machine it doesn't
+     exist. It is a crucial component of the Java Runtime Environment (JRE) and Java Development Kit (JDK).
+     The primary purpose of the JVM is to provide a runtime environment for Java applications which can executed
+     java bytecode.
+JVM Performs the following main tasks:
+     1. Loads code
+     2. Verifies code
+     3. Executes Code
+     4. Provide the Runtime Environment
+JVM key features:
+     1. Execution of Bytecode: The Java program or source code is compiled into an bytecode and this bytecode is
+        set of instructions that is not tied to any specific hardware or operating system.This process allows Java
+        programs to be "write once, run anywhere" JVM convert bytecode into machine code
+        note: the compiled bytecode is platform-independent so the bytecode can be run any operating system which is
+              having JVM and JDK tools
+     2. Memory Management: The  JVM handles memory allocation and garbage collection, which simplifies memory management
+        for Java developers. It automatically manages memory by deallocating objects that are no longer in use, reducing
+        the risk of memory leaks.
+     3. Security: The JVM provides a secure execution environment for Java applications. It includes features such as
+        classloaders,bytecode verification, and a security manager to ensure that Java programs run safely.
+     4. Java API Access: The JVM provides access to the Java API (Application Programming Interface), which consists of a vast
+        collection of pre-built classes and libraries that developers can use to perform various tasks, such as file handling,
+        network communication
+     5.Just-In-Time (JIT) Compilation: JVM implementations use a Just-In-Time compiler to further improve performance. The JIT
+       compiler translates bytecode into native machine code at runtime, optimizing the execution of the program
+
+JDK:JDK stands for Java Development kit it is Software Development Environment which is used to develop Java applications.
+Key Components and Features of the JDK:
+    1.Java Compiler: The JDK is contains the Java compiler which translates java source code (.java file) into
+      bytecode(.class files) the compiled bytecode is executed by the Java Virtual Machine (JVM).
+    2.Java Virtual Machine (JVM):The JDK is contains the JVM which is responsible for executing java bytecode into
+      machine code and JVM provides platform independence by compiling the bytecode at runtime.
+    3.Java Runtime Environment (JRE): The JDK contains a complete JRE, which includes the JVM, class libraries,
+      and other resources required to run Java applications.
+    4.Development Tools: The JDK provides various development tools, including the Java Debugger (jdb) for
+      debugging, Java Archive Tool (jar) for creating JAR files, and others. These tools assist developers
+      in writing, testing, and packaging Java applications.
+    5.API Documentation:The JDK includes the Java API(Application Programming Interface) which is having classes,
+      method and standard libraries to help of build java application.
+    6.Header Files and Development Libraries: To integrate Java with native code (e.g., using Java Native Interface or JNI),
+      the JDK includes header files and development libraries.
+JRE: JRE stands for Java Runtime Environment. The Java Runtime Environment is a set of software tools which are
+     used for developing Java applications. It is used to provide the runtime environment. It is the implementation
+     of JVM. It physically exists. It contains a set of libraries + other files that JVM uses at runtime.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+2. What is an Object in Java
+Link:https://www.javatpoint.com/object-and-class-in-java
+Link:https://javagoal.com/class-and-object-in-java/
+Object: The Object is an real-world entity that has state and behavior is known as an object  eg. pen, chair, table, car
+
+Real Life Example: Real-life example: In real life, A Mobile, pen, table, car, house, etc. are entities because they
+                   have some properties and behavior.
+                   If Mobile is an object it has some properties and behavior.
+                   Properties: color, size, shape, company name.
+                   Behavior/Operation: Call, music, camera
+Object Has three Characteristics:
+     1.State: represents the data (value) of an object.
+      Example: public class Phone{
+         // Properties (state)
+         private String brand;
+             private String model;
+             private String color;
+             private double screenSizeInches;
+             private int storageGB;
+             private boolean isSmartphone;
+      }
+     2.Behavior: represents the behavior (functionality) of an object like as a makeCall,sendTextMessage,takePicture,browseInternet
+      Example: public class Phone {
+                   // Properties (state)
+                   private String brand;
+                   private String model;
+                   private String color;
+                   private double screenSizeInches;
+                   private int storageGB;
+                   private boolean isSmartphone;
+
+                   // Behavior (methods)
+                       public void makeCall(String phoneNumber) {
+                           System.out.println("Making a call to " + phoneNumber);
+                       }
+
+                       public void sendTextMessage(String phoneNumber, String message) {
+                           System.out.println("Sending a text message to " + phoneNumber + ": " + message);
+                       }
+
+                       public void takePicture() {
+                           System.out.println("Taking a picture");
+                       }
+
+                       public void browseInternet(String url) {
+                           if (isSmartphone) {
+                               System.out.println("Browsing the internet: " + url);
+                           } else {
+                               System.out.println("This phone is not a smartphone and cannot browse the internet.");
+                           }
+                       }
+
+                }
+      3.Identity :object identity refers to the unique identity assigned to each object when it is created.The value of the ID
+        is not visible to the external user. it is used internally by the JVM to identify each object uniquely.
+
+
