@@ -3,4 +3,4 @@ Asked Question
 2.What is coroutine and use
 3.what is dagger and annotation
 4.What is activity life cycle
-5.What is thread safety in Java?
+5.What is thread safety in Java?	

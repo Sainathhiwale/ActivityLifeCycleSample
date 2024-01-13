@@ -3,4 +3,8 @@
     <string name="next_screen">Next Screen\n</string>
     <string name="helloActivity">Hello\n</string>
     <string name="fragment_b">Fragment B\n</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="user_name">User Name</string>
 </resources>
