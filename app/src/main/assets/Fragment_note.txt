@@ -305,3 +305,83 @@ Case 3:
         onDestroyView:
         onDestroy:
 -------------------------------------------------------------------------------------------------------
+
+1.	What is activity lifecycle in android their method?
+Android Activity Lifecycle (mindorks.com)
+https://shubham-nikam.medium.com/understand-the-activity-lifecycle-e4526ec1c436
+https://google-developer-training.github.io/android-developer-fundamentals-course-concepts/en/Unit%201/22_c_the_activity_lifecycle_and_managing_state.html
+
+2.	What is the difference between onCreate() and onStart()
+https://medium.com/@dvrajput96/demystifying-android-activity-lifecycle-ddce0a261b31
+
+3.	What is Context? How is it used?
+https://amitshekhar.me/blog/context-in-android-application
+
+4.	Tell all the Android application components.
+https://developer.android.com/guide/components/fundamentals.html#Components
+
+5.	Why is it recommended to use only the default constructor to create a Fragment?
+https://amitshekhar.me/blog/default-constructor-to-create-a-fragment
+
+6.	What is Fragment and lifecycle method.
+Fragments in Android. What is fragment? | by Abhishek Pathak | Medium
+https://data-flair.training/blogs/android-fragment/
+https://guides.codepath.com/android/creating-and-using-fragments
+https://www.javatpoint.com/android-fragments
+7.	What is the difference between a service and a thread?
+https://medium.com/@varun93342/difference-between-thread-service-and-asynctask-in-android-d6e37960e56c
+
+4.	What is broadcast receiver in android?
+https://medium.com/@kreynaldi04/android-fundamentals-07-3-broadcast-receivers-3e9f2f9cfb40
+
+5.	What is coroutines and why do we need kotlin coroutines?
+https://medium.com/@kamal.lakhani56/coroutine-interview-question-10c516158310
+
+6.	What is intent and types where can we use?
+https://www.geeksforgeeks.org/what-is-intent-in-android/
+https://www.geeksforgeeks.org/implicit-and-explicit-intents-in-android-with-examples/
+
+7.	What is Difference Between Serializable and Parcelable in Android?
+https://www.geeksforgeeks.org/difference-between-serializable-and-parcelable-in-android/
+
+8.	What is Difference between Service and Intent Service?
+https://blog.mindorks.com/service-vs-intentservice-in-android/
+
+9.	What is service in Android
+https://www.geeksforgeeks.org/services-in-android-with-example/
+
+
+
+
+
+Java
+https://github.com/amitshekhariitbhu/Learn-Kotlin-Coroutines
+
+1.	what is difference between Abstract class and interface?
+https://www.javatpoint.com/difference-between-abstract-class-and-interface
+
+2.	What is method overloading in java?
+https://www.javatpoint.com/method-overloading-in-java
+3.	What is method overriding in java?
+
+4.	What is difference between Hash-map and Hash-table? https://www.javatpoint.com/difference-between-hashmap-and-hashtable
+https://medium.com/@cs.vivekgupta/java-interview-questions-series-1-be7f9ee35218
+
+
+5.	What is difference between Hashmap-Hashset-Hashtable?
+http://javainfinite.com/java/hashmap-hashset-hashtable/
+
+6.	What is difference between Implement Runnable and extends Thread?
+https://www.java67.com/2016/01/7-differences-between-extends-thread-vs-implements-Runnable-java.html
+
+7.	What is LinkedList?
+https://javagoal.com/java-linkedlist/
+
+8.	What is difference between ArrayList and LinkedList?
+https://www.javatpoint.com/difference-between-arraylist-and-linkedlist
+https://javagoal.com/difference-between-arraylist-and-linkedlist/
+
+9.	What are the oops concept in java?
+https://stackify.com/oops-concepts-in-java/
+https://howtodoinjava.com/java/oops/understanding-abstraction-in-java/
+
