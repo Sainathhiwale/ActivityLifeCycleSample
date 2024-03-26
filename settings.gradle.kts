@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ActivityLifeCycleSample"
 include(":app")
- 
+include(":app:androidauto")
